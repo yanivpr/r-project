@@ -1,0 +1,28 @@
+<h1>Package '<%= @package.name %>'</h1>
+<p>
+  <%= @package.title %>
+</p>
+
+<p>
+  <%= @package.description %>
+</p>
+
+<h2>Versions</h2>
+<ul>
+  <% @package.versions.each do |version| %>
+    <%= "#{version.name}   #{version.publication_date}" %>
+
+    <% version.user_versions.group_by(&:user_type).each do |hash| %>
+      <h3><%= hash[0].titleize.pluralize %></h3>
+      <ul>
+        <% hash[1].each do |user_version| %>
+          <li>
+            <%= user_version.user %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to 'index ', packages_path %>

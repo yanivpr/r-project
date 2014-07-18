@@ -1,0 +1,21 @@
+<ul>
+
+  <%= link_to 'All packages', root_path %>
+  <%= form_for packages_path, method: :get do %>
+    <%= text_field_tag :free_text, params[:free_text], :placeholder => "search package" %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+
+
+  <p></p>
+
+  <% @packages.each do |package| %>
+
+  <li>
+    <%= link_to package.name, package_path(package) %>
+    <%= package.title %>
+    <%= package.publication_date %>
+  </li>
+
+  <% end %>
+</ul>
